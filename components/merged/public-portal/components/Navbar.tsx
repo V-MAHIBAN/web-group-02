@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { ScreenType, UserSession } from '../types';
 import { LOGOS } from '../data/mockData';
-import { ChevronDown, Menu, X, Home, BookOpen, Image as ImageIcon, User, ShieldCheck, Mail, LogOut, Info, BriefcaseBusiness, UsersRound } from 'lucide-react';
+import { Menu, X, Home, BookOpen, Image as ImageIcon, Mail, LogOut, Info } from 'lucide-react';
 
 interface NavbarProps {
   currentScreen: ScreenType;
@@ -18,12 +20,15 @@ export const Navbar: React.FC<NavbarProps> = ({
   userSession,
   onLogout
 }) => {
-  const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   const handleNav = (screen: ScreenType) => {
     onNavigate(screen);
-    setLoginDropdownOpen(false);
     setMobileMenuOpen(false);
   };
 
@@ -116,68 +121,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             Gallery
           </button>
 
-          {/* Login Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setLoginDropdownOpen(!loginDropdownOpen)}
-              onBlur={() => setTimeout(() => setLoginDropdownOpen(false), 200)}
-              className={`flex items-center gap-1 font-semibold text-sm transition-all duration-200 px-3.5 py-1 rounded-full ${
-                (isStudent || isVolunteer) && !isAdmin
-                  ? 'text-[#BF0A30] font-bold border border-[#BF0A30] bg-white/90 shadow-sm'
-                  : 'text-[#444650] hover:text-[#BF0A30] border border-transparent hover:border-[#c4c6d2]/40 bg-white/50'
-              }`}
-            >
-              <span>{userSession && userSession.type !== 'admin' ? `${userSession.type === 'student' ? 'Student Portal' : 'Volunteer Portal'}` : 'Login'}</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${loginDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
 
-            {loginDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-52 bg-white border border-[#c4c6d2] rounded-xl shadow-xl z-50 overflow-hidden py-1.5 animate-in fade-in slide-in-from-top-2 duration-150">
-                <button
-                  onClick={() => handleNav(userSession?.type === 'student' ? 'student-portal' : 'student-login')}
-                  className="w-full text-left px-4 py-2.5 text-sm font-medium text-[#121c2a] hover:bg-[#eff4ff] hover:text-[#002868] flex items-center gap-2.5 transition-colors"
-                >
-                  <User className="w-4 h-4 text-[#002868]" />
-                  <span>{userSession?.type === 'student' ? 'My Student Portal' : 'Student Login'}</span>
-                </button>
-                <button
-                  onClick={() => handleNav(userSession?.type === 'volunteer' ? 'volunteer-portal' : 'volunteer-login')}
-                  className="w-full text-left px-4 py-2.5 text-sm font-medium text-[#121c2a] hover:bg-[#eff4ff] hover:text-[#002868] flex items-center gap-2.5 transition-colors border-t border-[#eff4ff]"
-                >
-                  <User className="w-4 h-4 text-[#ba022d]" />
-                  <span>{userSession?.type === 'volunteer' ? 'My Volunteer Portal' : 'Volunteer Login'}</span>
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Admin */}
-          <button
-            onClick={() => handleNav(userSession?.type === 'admin' ? 'admin-portal' : 'admin-login')}
-            className={`font-semibold text-sm transition-all duration-200 px-3.5 py-1 rounded-full flex items-center gap-1.5 ${
-              isAdmin
-                ? 'text-[#BF0A30] font-bold border border-[#BF0A30] bg-white/90 shadow-sm'
-                : 'text-[#444650] hover:text-[#BF0A30] border border-transparent hover:border-[#c4c6d2]/40 bg-white/50'
-            }`}
-          >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>{userSession?.type === 'admin' ? 'Admin Dashboard' : 'Admin'}</span>
-          </button>
 
           <button
-            onClick={() => onOpenWorkspace?.('academic')}
-            className="font-semibold text-sm transition-all duration-200 px-3.5 py-1 rounded-full flex items-center gap-1.5 text-[#444650] hover:text-[#BF0A30] border border-transparent hover:border-[#c4c6d2]/40 bg-white/50"
+            onClick={() => handleNav('dashboard-selection')}
+            className="font-semibold text-sm transition-all duration-200 px-3.5 py-1 rounded-full text-[#444650] hover:text-[#BF0A30] border border-transparent hover:border-[#c4c6d2]/40 bg-white/50"
           >
-            <BriefcaseBusiness className="w-3.5 h-3.5" />
-            <span>Staff</span>
-          </button>
-
-          <button
-            onClick={() => onOpenWorkspace?.('community')}
-            className="font-semibold text-sm transition-all duration-200 px-3.5 py-1 rounded-full flex items-center gap-1.5 text-[#444650] hover:text-[#BF0A30] border border-transparent hover:border-[#c4c6d2]/40 bg-white/50"
-          >
-            <UsersRound className="w-3.5 h-3.5" />
-            <span>Community</span>
+            <span>Login</span>
           </button>
 
           {/* Contact Us */}
@@ -193,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* User Session Logout Pill if logged in */}
-          {userSession && (
+          {isHydrated && userSession && (
             <button
               onClick={onLogout}
               title="Log out of session"
@@ -207,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
-          {userSession && (
+          {isHydrated && userSession && (
             <button
               onClick={onLogout}
               className="p-1.5 text-red-600 bg-red-50 rounded-md text-xs font-medium flex items-center gap-1"
@@ -265,44 +215,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="flex items-center gap-2"><ImageIcon className="w-4 h-4" /> Gallery & Photos</span>
           </button>
 
-          <div className="pt-2 pb-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#747781] px-3">Portals & Login</span>
-            <div className="flex flex-col gap-1 mt-1">
-              <button
-                onClick={() => handleNav(userSession?.type === 'student' ? 'student-portal' : 'student-login')}
-                className="w-full text-left py-2 px-3 pl-6 rounded-lg text-sm font-medium text-[#121c2a] hover:bg-gray-50 flex items-center gap-2"
-              >
-                <User className="w-3.5 h-3.5 text-[#002868]" />
-                <span>{userSession?.type === 'student' ? 'Student Dashboard' : 'Student Login'}</span>
-              </button>
-              <button
-                onClick={() => handleNav(userSession?.type === 'volunteer' ? 'volunteer-portal' : 'volunteer-login')}
-                className="w-full text-left py-2 px-3 pl-6 rounded-lg text-sm font-medium text-[#121c2a] hover:bg-gray-50 flex items-center gap-2"
-              >
-                <User className="w-3.5 h-3.5 text-[#ba022d]" />
-                <span>{userSession?.type === 'volunteer' ? 'Volunteer Dashboard' : 'Volunteer Login'}</span>
-              </button>
-              <button
-                onClick={() => handleNav(userSession?.type === 'admin' ? 'admin-portal' : 'admin-login')}
-                className="w-full text-left py-2 px-3 pl-6 rounded-lg text-sm font-medium text-[#121c2a] hover:bg-gray-50 flex items-center gap-2"
-              >
-                <ShieldCheck className="w-3.5 h-3.5 text-[#002868]" />
-                <span>{userSession?.type === 'admin' ? 'Admin Dashboard' : 'Admin Login'}</span>
-              </button>
-            </div>
-          </div>
+
 
           <button
-            onClick={() => { onOpenWorkspace?.('academic'); setMobileMenuOpen(false); }}
-            className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold flex items-center gap-2 text-[#121c2a] hover:bg-gray-50"
+            onClick={() => handleNav('dashboard-selection')}
+            className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold text-[#121c2a] hover:bg-gray-50"
           >
-            <BriefcaseBusiness className="w-4 h-4" /> Staff workspace
-          </button>
-          <button
-            onClick={() => { onOpenWorkspace?.('community'); setMobileMenuOpen(false); }}
-            className="w-full text-left py-2.5 px-3 rounded-lg text-sm font-semibold flex items-center gap-2 text-[#121c2a] hover:bg-gray-50"
-          >
-            <UsersRound className="w-4 h-4" /> Community workspace
+            Login
           </button>
 
           <button

@@ -42,12 +42,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed left-0 top-0 h-screen w-[280px] bg-[#002868] text-white z-50 flex flex-col py-6 px-4 transition-transform duration-300 ease-in-out md:translate-x-0 ${
+        className={`fixed left-0 top-0 h-screen w-[280px] bg-[#002868] text-white z-50 flex flex-col py-6 px-3 transition-transform duration-300 ease-in-out md:translate-x-0 md:relative md:z-0 ${
           isOpenMobile ? 'translate-x-0' : '-translate-x-full'
-        } shadow-xl md:shadow-none select-none`}
+        } shadow-xl md:shadow-md select-none`}
       >
         {/* Header / Staff Profile */}
-        <div className="mb-8 px-2 flex items-center justify-between">
+        <div className="mb-8 px-1 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img
               src={BRAND_ASSETS.staffAvatar}
@@ -70,27 +70,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Main Navigation Tabs */}
-        <nav className="flex-1 space-y-1 overflow-y-auto pr-1">
-          {navItems.map(item => {
+        <nav className="flex-1 space-y-1.5 overflow-y-auto pr-1\">\n          {navItems.map(item => {
             const isActive = currentTab === item.tab;
             return (
               <button
                 key={item.tab}
                 onClick={() => handleNavClick(item.tab)}
                 id={`nav-${item.tab}`}
-                className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-left transition-all duration-150 font-medium text-[14px] ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-150 font-medium text-[13px] whitespace-nowrap ${
                   isActive
-                    ? 'bg-white/10 text-white font-bold shadow-xs'
-                    : 'text-[#CED9FF]/80 hover:bg-white/5 hover:text-white'
+                    ? 'bg-white/15 text-white font-bold shadow-sm'
+                    : 'text-[#CED9FF]/80 hover:bg-white/8 hover:text-white'
                 }`}
               >
                 <span
-                  className="material-symbols-outlined text-[22px]"
-                  style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
+                  className=\"material-symbols-outlined flex-shrink-0 text-[20px]\"
+                  style={isActive ? { fontVariationSettings: \"'FILL' 1\" } : undefined}
                 >
                   {item.icon}
                 </span>
-                <span className="truncate">{item.label}</span>
+                <span className=\"truncate text-[13px]\">{item.label}</span>
               </button>
             );
           })}

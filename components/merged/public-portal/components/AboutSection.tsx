@@ -16,8 +16,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
           <div className="rounded-2xl overflow-hidden shadow-md border border-[#c4c6d2]/40 bg-white">
             <img
               alt="American Corner exterior entrance"
-              className="rounded-2xl shadow-md w-full h-[360px] md:h-[420px] object-cover transition-transform duration-500 group-hover:scale-105"
-              src={HERO_IMAGES.exterior}
+              className="rounded-2xl shadow-md w-full h-[360px] md:h-[420px] object-cover transition-transform duration-500 group-hover:scale-105 bg-gray-200"
+              src="https://via.placeholder.com/800x600?text=American+Corner+Entrance"
             />
           </div>
           <div className="absolute -bottom-4 -right-4 hidden lg:flex items-center gap-3 bg-white p-3.5 rounded-xl shadow-lg border border-[#c4c6d2]/50">

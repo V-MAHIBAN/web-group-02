@@ -60,24 +60,24 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   const alerts = activities.filter(a => a.type === 'alert' || a.severity === 'high' || a.severity === 'warning');
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-[#E2E8F0] h-16 px-4 md:px-8 flex items-center justify-between shadow-xs">
+    <header className="sticky top-0 z-40 bg-white border-b border-[#E2E8F0] h-16 px-4 sm:px-6 md:px-8 flex items-center justify-between shadow-sm">
       {/* Left Area: Mobile Menu Trigger & Institutional Logos */}
-      <div className="flex items-center gap-3 md:gap-5">
+      <div className="flex items-center gap-2 md:gap-4 min-w-0 flex-1">
         <button
           onClick={onOpenMobileMenu}
           id="mobile-menu-trigger"
-          className="md:hidden p-2 -ml-2 text-[#121C2A] hover:bg-[#EFF4FF] rounded-lg transition-colors"
+          className="md:hidden p-2 -ml-2 text-[#121C2A] hover:bg-[#EFF4FF] rounded-lg transition-colors flex-shrink-0"
           aria-label="Open Mobile Menu"
         >
           <span className="material-symbols-outlined text-[24px]">menu</span>
         </button>
 
         {/* Dual Logos (US Embassy American Corner + Academic Nexus) */}
-        <div className="flex items-center gap-2 sm:gap-4 h-10">
+        <div className="flex items-center gap-1.5 sm:gap-3 h-10 min-w-0">
           <img
             src={BRAND_ASSETS.usEmbassyLogo}
             alt="US Embassy Logo"
-            className="h-8 md:h-10 w-auto object-contain shrink-0"
+            className="h-7 md:h-9 w-auto object-contain shrink-0"
           />
           <div className="h-6 w-px bg-[#E2E8F0] hidden sm:block"></div>
           <img
@@ -89,11 +89,11 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
       </div>
 
       {/* Right Area: Search, Quick Actions & User Menu */}
-      <div className="flex items-center gap-2 sm:gap-4">
+      <div className="flex items-center gap-1 sm:gap-2 ml-2 flex-shrink-0">
         {/* Live Search Input */}
-        <div ref={searchRef} className="relative hidden sm:block">
-          <div className="flex items-center bg-[#F8FAFC] border border-[#CBD5E1] rounded-full px-3.5 py-1.5 w-60 lg:w-72 focus-within:border-[#1D4ED8] focus-within:ring-2 focus-within:ring-[#1D4ED8]/20 transition-all">
-            <span className="material-symbols-outlined text-[#64748B] text-[18px] mr-2">search</span>
+        <div ref={searchRef} className="relative hidden md:block">
+          <div className="flex items-center bg-[#F8FAFC] border border-[#CBD5E1] rounded-lg px-3 py-1.5 w-52 lg:w-64 focus-within:border-[#1D4ED8] focus-within:ring-2 focus-within:ring-[#1D4ED8]/20 transition-all">
+            <span className="material-symbols-outlined text-[#64748B] text-[18px] mr-2 flex-shrink-0">search</span>
             <input
               type="text"
               id="top-search-input"
@@ -103,13 +103,13 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
                 setIsSearchOpen(true);
               }}
               onFocus={() => setIsSearchOpen(true)}
-              placeholder="Search students, alerts..."
-              className="bg-transparent border-none outline-none text-[14px] text-[#121C2A] w-full placeholder:text-[#64748B]/70"
+              placeholder="Search students..."
+              className="bg-transparent border-none outline-none text-[13px] text-[#121C2A] w-full placeholder:text-[#64748B]/60"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="text-[#64748B] hover:text-[#121C2A] text-xs ml-1"
+                className="text-[#64748B] hover:text-[#121C2A] text-xs ml-1 flex-shrink-0"
               >
                 ✕
               </button>
@@ -118,12 +118,12 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
 
           {/* Search Results Dropdown */}
           {isSearchOpen && searchQuery.trim() !== '' && (
-            <div className="absolute right-0 mt-2 w-80 bg-white border border-[#E2E8F0] rounded-xl shadow-xl z-50 overflow-hidden">
-              <div className="p-2.5 bg-[#F8FAFC] border-b border-[#E2E8F0] text-[12px] font-semibold text-[#64748B] uppercase tracking-wider">
-                Matching Student Records ({searchResults.length})
+            <div className="absolute right-0 mt-2 w-80 bg-white border border-[#E2E8F0] rounded-lg shadow-lg z-50 overflow-hidden">
+              <div className="p-2.5 bg-[#F8FAFC] border-b border-[#E2E8F0] text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">
+                Matching Students ({searchResults.length})
               </div>
               {searchResults.length > 0 ? (
-                <div className="divide-y divide-[#E2E8F0] max-h-64 overflow-y-auto">
+                <div className="divide-y divide-[#E2E8F0] max-h-72 overflow-y-auto">
                   {searchResults.map(student => (
                     <button
                       key={student.id}

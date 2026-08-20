@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScreenType } from '../types';
 import { HERO_IMAGES } from '../data/mockData';
-import { ArrowRight, Sparkles, Users } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface HeroSectionProps {
   onNavigate: (screen: ScreenType) => void;
@@ -31,17 +31,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           >
             <span>Explore Programs</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
-
-          <button
-            onClick={() => {
-              const el = document.getElementById('community-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="px-6 py-3 rounded-lg bg-[#ba022d] text-white hover:bg-[#de2a43] font-semibold text-sm transition-all shadow-md hover:shadow-lg flex items-center gap-2 transform hover:-translate-y-0.5"
-          >
-            <Users className="w-4 h-4" />
-            <span>Join Our Community</span>
           </button>
         </div>
       </div>

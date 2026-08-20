@@ -4,12 +4,16 @@ export type ScreenType =
   | 'programs'
   | 'gallery'
   | 'contact'
+  | 'dashboard-selection'
+  | 'unified-portal'
   | 'student-login'
   | 'student-forgot-password'
   | 'student-portal'
   | 'volunteer-login'
   | 'volunteer-forgot-password'
   | 'volunteer-portal'
+  | 'staff-login'
+  | 'staff-portal'
   | 'admin-login'
   | 'admin-signup'
   | 'admin-forgot-password'
@@ -117,7 +121,7 @@ export interface Announcement {
 }
 
 export interface UserSession {
-  type: 'student' | 'volunteer' | 'admin';
+  type: 'student' | 'volunteer' | 'staff' | 'admin';
   id?: string;
   userId?: string;
   name: string;
