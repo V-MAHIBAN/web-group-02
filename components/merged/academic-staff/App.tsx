@@ -55,7 +55,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#121C2A] flex flex-col font-sans selection:bg-[#FFDAD6] selection:text-[#940021]">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#121C2A] flex font-sans selection:bg-[#FFDAD6] selection:text-[#940021]">
       {/* Side Navigation Bar */}
       <Sidebar
         currentTab={currentTab}
@@ -69,7 +69,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:ml-[280px] min-w-0 transition-all duration-200">
+      <div className="flex-1 flex flex-col min-w-0 transition-all duration-200">
         {/* Top Navigation Bar */}
         <TopHeader
           onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
@@ -82,8 +82,9 @@ export default function App() {
         />
 
         {/* Dynamic Page Views Canvas */}
-        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
-          {currentTab === 'dashboard' && (
+        <main className="flex-1 overflow-y-auto bg-[#F8FAFC]">
+          <div className="p-4 sm:p-6 md:p-8 w-full">
+            {currentTab === 'dashboard' && (
             <DashboardView
               metrics={metrics}
               activities={activities}
@@ -128,7 +129,7 @@ export default function App() {
           {currentTab === 'support' && (
             <SupportView />
           )}
-        </main>
+          </div>
       </div>
 
       {/* Interactive Modals */}
