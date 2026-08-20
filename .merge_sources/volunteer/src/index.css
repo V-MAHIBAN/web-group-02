@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1F2937;
+    background-color: #F8FAFC;
+  }
+}
+
+/* Ambient Shadows and Elevations matching design specs */
+.elevation-1 {
+  box-shadow: 0 1px 3px rgba(0, 40, 104, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.elevation-2 {
+  box-shadow: 0 4px 12px rgba(0, 40, 104, 0.08);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.elevation-2:hover {
+  box-shadow: 0 8px 24px rgba(0, 40, 104, 0.12);
+  transform: translateY(-2px);
+}
+
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 40, 104, 0.1);
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

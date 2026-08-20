@@ -1,0 +1,6 @@
+{
+  "name": "EduCommunity Pro",
+  "description": "Comprehensive civic education, student & admin portal with AI learning assistant, interactive course modules, community forums, and daily study wellness tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

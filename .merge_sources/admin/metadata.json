@@ -1,0 +1,7 @@
+{
+  "name": "AC Batticaloa Admin Portal",
+  "description": "Comprehensive American Corner Batticaloa Admin Portal (ACIMS) for managing programs, users, volunteer applications, attendance, news, gallery, announcements, reports, and system settings.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

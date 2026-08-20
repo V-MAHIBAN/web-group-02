@@ -1,0 +1,6 @@
+{
+  "name": "Academic Nexus Staff Portal",
+  "description": "Academic administration portal for student management, real-time attendance tracking, QR check-in, and alert monitoring.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

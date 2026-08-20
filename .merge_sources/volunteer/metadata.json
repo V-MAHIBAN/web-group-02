@@ -1,0 +1,6 @@
+{
+  "name": "VolunteerConnect",
+  "description": "Comprehensive Volunteer Impact & Program Management Dashboard with Task Tracking, Hours Logging, Certificates, and Attendance Records.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
