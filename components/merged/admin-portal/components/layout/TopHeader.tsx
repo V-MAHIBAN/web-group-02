@@ -106,7 +106,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   const actionConfig = getPrimaryActionConfig();
 
   return (
-    <header className="fixed top-0 right-0 left-0 md:left-[280px] h-16 md:h-[72px] z-30 bg-white/95 backdrop-blur-md border-b border-gray-200/80 shadow-xs flex items-center justify-between px-4 sm:px-6 lg:px-8 transition-all">
+    <header className="flex h-16 items-center justify-between border-b border-gray-200/80 bg-white/95 px-4 shadow-xs transition-all sm:px-6 lg:px-8 md:h-[72px]">
       {/* Left side: Mobile menu toggle + Context Search */}
       <div className="flex items-center gap-3 md:gap-6 flex-1 max-w-2xl">
         <button

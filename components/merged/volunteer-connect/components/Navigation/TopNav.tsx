@@ -44,9 +44,9 @@ export const TopNav: React.FC<TopNavProps> = ({
   };
 
   return (
-    <header className="bg-[#FFFFFF] border-b border-slate-200 h-16 px-4 md:px-8 flex justify-between items-center sticky top-0 z-30 shadow-xs">
+    <header className="bg-[#FFFFFF] border-b border-slate-200 h-16 md:h-20 px-4 md:px-8 flex justify-between items-center sticky top-0 z-30 shadow-[0_1px_0_rgba(15,23,42,0.04)]">
       {/* Left side: Hamburger on mobile + Title */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 min-w-0">
         <button
           onClick={onToggleMobileMenu}
           className="md:hidden p-2 rounded-lg text-[#002868] hover:bg-slate-100 transition-colors cursor-pointer"
@@ -54,13 +54,13 @@ export const TopNav: React.FC<TopNavProps> = ({
         >
           <Menu className="w-5 h-5 text-[#002868]" />
         </button>
-        <h2 className="text-lg md:text-xl font-bold text-[#1F2937] tracking-tight">
+        <h2 className="text-lg md:text-xl font-bold text-[#1F2937] tracking-tight truncate">
           {getTitle()}
         </h2>
       </div>
 
       {/* Right side: Search bar + Notification + Help + Profile avatar */}
-      <div className="flex items-center gap-3 md:gap-4">
+      <div className="flex items-center gap-3 md:gap-4 shrink-0">
         {/* Search input */}
         <div className="relative hidden sm:block">
           <Search className="w-4 h-4 text-[#002868] absolute left-3 top-1/2 -translate-y-1/2" />
@@ -69,7 +69,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search tasks, programs, history..."
-            className="pl-9 pr-4 py-1.5 rounded-full border border-slate-300 focus:border-[#002868] focus:ring-1 focus:ring-[#002868] focus:outline-none bg-[#F8FAFC] text-xs md:text-sm text-[#1F2937] w-48 lg:w-64 transition-all"
+            className="pl-9 pr-8 py-2 rounded-full border border-slate-300 focus:border-[#002868] focus:ring-1 focus:ring-[#002868] focus:outline-none bg-[#F8FAFC] text-xs md:text-sm text-[#1F2937] w-48 lg:w-64 transition-all"
           />
           {searchQuery && (
             <button

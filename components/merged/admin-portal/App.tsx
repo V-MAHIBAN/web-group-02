@@ -230,156 +230,159 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans antialiased flex flex-col">
-      {/* Side Navigation */}
-      <SideNav
-        currentTab={currentTab}
-        onSelectTab={(tab) => {
-          setCurrentTab(tab);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        isOpenMobile={isMobileNavOpen}
-        onCloseMobile={() => setIsMobileNavOpen(false)}
-        pendingApplicationsCount={pendingAppsCount}
-      />
+    <div className="app admin-app">
+      <div className="sidebar">
+        <SideNav
+          currentTab={currentTab}
+          onSelectTab={(tab) => {
+            setCurrentTab(tab);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          isOpenMobile={isMobileNavOpen}
+          onCloseMobile={() => setIsMobileNavOpen(false)}
+          pendingApplicationsCount={pendingAppsCount}
+        />
+      </div>
 
-      {/* Top Header */}
-      <TopHeader
-        currentTab={currentTab}
-        onOpenMobileMenu={() => setIsMobileNavOpen(true)}
-        onQuickAction={handleQuickAction}
-        searchQuery={globalSearch}
-        onSearchChange={setGlobalSearch}
-        onOpenSupportModal={() => setSupportModalOpen(true)}
-        onNavigateTab={(tab) => setCurrentTab(tab)}
-      />
+      <div className="topbar">
+        <TopHeader
+          currentTab={currentTab}
+          onOpenMobileMenu={() => setIsMobileNavOpen(true)}
+          onQuickAction={handleQuickAction}
+          searchQuery={globalSearch}
+          onSearchChange={setGlobalSearch}
+          onOpenSupportModal={() => setSupportModalOpen(true)}
+          onNavigateTab={(tab) => setCurrentTab(tab)}
+        />
+      </div>
 
-      {/* Main Content Area */}
-      <main className="ml-0 md:ml-[280px] mt-16 md:mt-[72px] min-w-0 flex-1 p-4 sm:p-6 lg:p-8 w-full max-w-7xl mx-auto overflow-x-auto transition-all">
-        {currentTab === 'dashboard' && (
-          <DashboardView
-            onNavigateTab={setCurrentTab}
-            onReviewApplication={handleReviewAppById}
-            pendingAppsCount={pendingAppsCount}
-            totalVolunteers={volunteerApps.length + 118}
-            activeProgramsCount={programs.filter((p) => !p.isPast).length}
-            recentActivities={activities}
-            calendarEvents={initialCalendarEvents}
-          />
-        )}
+      <main className="main">
+        <div className="container">
+          {currentTab === 'dashboard' && (
+            <DashboardView
+              onNavigateTab={setCurrentTab}
+              onReviewApplication={handleReviewAppById}
+              pendingAppsCount={pendingAppsCount}
+              totalVolunteers={volunteerApps.length + 118}
+              activeProgramsCount={programs.filter((p) => !p.isPast).length}
+              recentActivities={activities}
+              calendarEvents={initialCalendarEvents}
+            />
+          )}
 
-        {currentTab === 'users' && (
-          <UserManagementView
-            users={users}
-            onAddUserClick={() => {
-              setEditingUser(null);
-              setUserModalOpen(true);
-            }}
-            onEditUser={(u) => {
-              setEditingUser(u);
-              setUserModalOpen(true);
-            }}
-            onDeleteUser={(id) => {
-              if (confirm('Are you sure you want to remove this user from the system?')) {
-                setUsers((prev) => prev.filter((u) => u.id !== id));
-              }
-            }}
-          />
-        )}
+          {currentTab === 'users' && (
+            <UserManagementView
+              users={users}
+              onAddUserClick={() => {
+                setEditingUser(null);
+                setUserModalOpen(true);
+              }}
+              onEditUser={(u) => {
+                setEditingUser(u);
+                setUserModalOpen(true);
+              }}
+              onDeleteUser={(id) => {
+                if (confirm('Are you sure you want to remove this user from the system?')) {
+                  setUsers((prev) => prev.filter((u) => u.id !== id));
+                }
+              }}
+            />
+          )}
 
-        {currentTab === 'volunteers' && (
-          <VolunteerApplicationsView
-            applications={volunteerApps}
-            onReviewApplication={(app) => setReviewingApp(app)}
-            onExportCSV={() => handleExportCSV('ac_batticaloa_volunteers.csv')}
-          />
-        )}
+          {currentTab === 'volunteers' && (
+            <VolunteerApplicationsView
+              applications={volunteerApps}
+              onReviewApplication={(app) => setReviewingApp(app)}
+              onExportCSV={() => handleExportCSV('ac_batticaloa_volunteers.csv')}
+            />
+          )}
 
-        {currentTab === 'programs' && (
-          <ProgramManagementView
-            programs={programs}
-            onOpenNewProgramModal={() => {
-              setEditingProgram(null);
-              setProgramModalOpen(true);
-            }}
-            onManageProgram={(prog) => {
-              setEditingProgram(prog);
-              setProgramModalOpen(true);
-            }}
-          />
-        )}
+          {currentTab === 'programs' && (
+            <ProgramManagementView
+              programs={programs}
+              onOpenNewProgramModal={() => {
+                setEditingProgram(null);
+                setProgramModalOpen(true);
+              }}
+              onManageProgram={(prog) => {
+                setEditingProgram(prog);
+                setProgramModalOpen(true);
+              }}
+            />
+          )}
 
-        {currentTab === 'attendance' && (
-          <AttendanceManagementView
-            attendanceRecords={attendanceRecords}
-            onOpenManualEntry={() => {
-              setEditingAttendance(null);
-              setAttendanceModalOpen(true);
-            }}
-            onExportReport={() => handleExportCSV('ac_batticaloa_attendance.csv')}
-            onEditRecord={(record) => {
-              setEditingAttendance(record);
-              setAttendanceModalOpen(true);
-            }}
-          />
-        )}
+          {currentTab === 'attendance' && (
+            <AttendanceManagementView
+              attendanceRecords={attendanceRecords}
+              onOpenManualEntry={() => {
+                setEditingAttendance(null);
+                setAttendanceModalOpen(true);
+              }}
+              onExportReport={() => handleExportCSV('ac_batticaloa_attendance.csv')}
+              onEditRecord={(record) => {
+                setEditingAttendance(record);
+                setAttendanceModalOpen(true);
+              }}
+            />
+          )}
 
-        {currentTab === 'news' && (
-          <NewsManagementView
-            newsArticles={newsArticles}
-            onAddNewsClick={() => alert('New News article composer open.')}
-            onEditNews={(art) => alert(`Editing article: "${art.title}"`)}
-            onDeleteNews={(id) => {
-              if (confirm('Delete this article from news registry?')) {
-                setNewsArticles((prev) => prev.filter((a) => a.id !== id));
-              }
-            }}
-          />
-        )}
+          {currentTab === 'news' && (
+            <NewsManagementView
+              newsArticles={newsArticles}
+              onAddNewsClick={() => alert('New News article composer open.')}
+              onEditNews={(art) => alert(`Editing article: "${art.title}"`)}
+              onDeleteNews={(id) => {
+                if (confirm('Delete this article from news registry?')) {
+                  setNewsArticles((prev) => prev.filter((a) => a.id !== id));
+                }
+              }}
+            />
+          )}
 
-        {currentTab === 'gallery' && (
-          <GalleryManagementView
-            albums={albums}
-            onCreateAlbumClick={() => alert('Media Album Creator initialized.')}
-            onOpenAlbum={(album) => alert(`Viewing Album: "${album.title}"`)}
-          />
-        )}
+          {currentTab === 'gallery' && (
+            <GalleryManagementView
+              albums={albums}
+              onCreateAlbumClick={() => alert('Media Album Creator initialized.')}
+              onOpenAlbum={(album) => alert(`Viewing Album: "${album.title}"`)}
+            />
+          )}
 
-        {currentTab === 'announcements' && (
-          <AnnouncementsView
-            announcements={announcements}
-            onAddAnnouncementClick={() => alert('Broadcast announcement modal initialized.')}
-            onEditAnnouncement={(anc) => alert(`Editing Announcement: "${anc.title}"`)}
-            onDuplicateAnnouncement={(anc) => {
-              const dup: Announcement = {
-                ...anc,
-                id: `anc-${Date.now()}`,
-                title: `${anc.title} (Copy)`,
-                status: 'Draft' as any,
-              };
-              setAnnouncements((prev) => [dup, ...prev]);
-            }}
-            onDeleteAnnouncement={(id) => {
-              if (confirm('Delete announcement?')) {
-                setAnnouncements((prev) => prev.filter((a) => a.id !== id));
-              }
-            }}
-          />
-        )}
+          {currentTab === 'announcements' && (
+            <AnnouncementsView
+              announcements={announcements}
+              onAddAnnouncementClick={() => alert('Broadcast announcement modal initialized.')}
+              onEditAnnouncement={(anc) => alert(`Editing Announcement: "${anc.title}"`)}
+              onDuplicateAnnouncement={(anc) => {
+                const dup: Announcement = {
+                  ...anc,
+                  id: `anc-${Date.now()}`,
+                  title: `${anc.title} (Copy)`,
+                  status: 'Draft' as any,
+                };
+                setAnnouncements((prev) => [dup, ...prev]);
+              }}
+              onDeleteAnnouncement={(id) => {
+                if (confirm('Delete announcement?')) {
+                  setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+                }
+              }}
+            />
+          )}
 
-        {currentTab === 'reports' && (
-          <ReportsAnalyticsView
-            reports={reports}
-            onGenerateNewReport={() => alert('Generating institutional report...')}
-          />
-        )}
+          {currentTab === 'reports' && (
+            <ReportsAnalyticsView
+              reports={reports}
+              onGenerateNewReport={() => alert('Generating institutional report...')}
+            />
+          )}
 
-        {currentTab === 'settings' && (
-          <SystemSettingsView
-            settings={settings}
-            onSaveSettings={(newSettings) => setSettings(newSettings)}
-          />
-        )}
+          {currentTab === 'settings' && (
+            <SystemSettingsView
+              settings={settings}
+              onSaveSettings={(newSettings) => setSettings(newSettings)}
+            />
+          )}
+        </div>
       </main>
 
       {/* Modals & Drawers */}

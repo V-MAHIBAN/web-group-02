@@ -51,29 +51,29 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   const circleOffset = 251.2 * (1 - currentMonthlyHours / goalMonthlyHours);
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-6 lg:space-y-8 animate-fadeIn">
       {/* Welcome Banner & Action Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-[#1F2937] tracking-tight">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="min-w-0">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-[#1F2937] tracking-tight leading-tight">
             Welcome back, {user.name.split(' ')[0]}!
           </h1>
-          <p className="text-sm md:text-base text-slate-600 mt-1">
+          <p className="text-sm md:text-base text-slate-600 mt-1 leading-relaxed">
             Ready to make a difference today? Here's your impact overview.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <button
             onClick={onNavigateToTasks}
-            className="px-4 py-2.5 bg-[#002868] hover:bg-[#001e50] text-white rounded-lg text-sm font-semibold flex items-center gap-2 shadow-sm hover:shadow-md transition-all active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto px-4 py-2.5 bg-[#002868] hover:bg-[#001e50] text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-2 shadow-sm hover:shadow-md transition-all active:scale-95 cursor-pointer"
           >
             <Search className="w-4 h-4" />
             <span>Find New Tasks</span>
           </button>
           <button
             onClick={onOpenLogHours}
-            className="px-4 py-2.5 bg-[#BF0A30] hover:bg-[#D7263D] text-white rounded-lg text-sm font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto px-4 py-2.5 bg-[#BF0A30] hover:bg-[#D7263D] text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Log Hours</span>
@@ -82,11 +82,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </div>
 
       {/* Top 3 Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
         {/* Card 1: Total Hours */}
         <div
           onClick={onNavigateToHours}
-          className="bg-[#FFFFFF] rounded-xl p-6 shadow-sm border border-slate-200 relative overflow-hidden group hover:shadow-md hover:border-[#002868]/30 transition-all cursor-pointer"
+          className="bg-[#FFFFFF] rounded-xl p-5 lg:p-6 shadow-sm border border-slate-200 relative overflow-hidden group hover:shadow-md hover:border-[#002868]/30 transition-all cursor-pointer min-h-[180px] flex flex-col justify-between"
         >
           <div className="flex justify-between items-start mb-4">
             <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#002868] flex items-center justify-center">
@@ -111,7 +111,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Card 2: Upcoming Tasks */}
         <div
           onClick={onNavigateToTasks}
-          className="bg-[#FFFFFF] rounded-xl p-6 shadow-sm border border-slate-200 relative overflow-hidden group hover:shadow-md hover:border-[#002868]/30 transition-all cursor-pointer"
+          className="bg-[#FFFFFF] rounded-xl p-5 lg:p-6 shadow-sm border border-slate-200 relative overflow-hidden group hover:shadow-md hover:border-[#002868]/30 transition-all cursor-pointer min-h-[180px] flex flex-col justify-between"
         >
           <div className="flex justify-between items-start mb-4">
             <div className="w-10 h-10 rounded-xl bg-amber-50 text-[#F59E0B] flex items-center justify-center">
@@ -131,7 +131,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Card 3: Completed This Month */}
-        <div className="bg-[#FFFFFF] rounded-xl p-6 shadow-sm border border-slate-200 relative overflow-hidden group hover:shadow-md hover:border-[#002868]/30 transition-all">
+        <div className="bg-[#FFFFFF] rounded-xl p-5 lg:p-6 shadow-sm border border-slate-200 relative overflow-hidden group hover:shadow-md hover:border-[#002868]/30 transition-all min-h-[180px] flex flex-col justify-between">
           <div className="flex justify-between items-start mb-4">
             <div className="w-10 h-10 rounded-xl bg-green-50 text-[#16A34A] flex items-center justify-center">
               <CheckCircle2 className="w-5 h-5 text-[#16A34A]" />
@@ -162,9 +162,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </div>
 
       {/* Main Grid: Upcoming Activities (Left) & Recent Activity Timeline (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-12 gap-5 lg:gap-6 xl:gap-8">
         {/* Left Column (7 cols): Upcoming Activities Cards */}
-        <div className="lg:col-span-7 space-y-4">
+        <div className="xl:col-span-7 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-[#1F2937]">Upcoming Activities</h2>
             <button
@@ -273,8 +273,8 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* Right Column (5 cols): Recent Activity Feed */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="bg-[#FFFFFF] rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col">
+        <div className="xl:col-span-5 space-y-4">
+          <div className="bg-[#FFFFFF] rounded-xl p-5 lg:p-6 border border-slate-200 shadow-sm flex flex-col h-full">
             <div className="flex justify-between items-center pb-4 border-b border-slate-100">
               <h3 className="font-bold text-lg text-[#1F2937]">Recent Activity</h3>
               <Clock className="w-4 h-4 text-[#002868]" />

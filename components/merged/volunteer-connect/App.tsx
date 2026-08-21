@@ -125,7 +125,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col antialiased selection:bg-primary/20 selection:text-primary">
+    <div className="min-h-screen bg-background text-foreground flex flex-col antialiased selection:bg-primary/20 selection:text-primary overflow-x-hidden">
       {/* Toast Notification Banner */}
       {toastMessage && (
         <div className="fixed top-5 right-5 z-50 bg-[#002868] text-white px-5 py-3 rounded-xl shadow-xl border border-blue-400/30 text-xs md:text-sm font-semibold flex items-center gap-3 animate-fadeIn">
@@ -159,7 +159,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <div className="pl-0 md:pl-64 min-w-0 flex-1 flex flex-col min-h-screen pb-20 md:pb-12">
+      <div className="pl-0 md:pl-64 min-w-0 flex-1 flex flex-col min-h-screen pb-20 md:pb-12 overflow-x-hidden">
         {/* Sticky Top Header */}
         <TopNav
           activeTab={activeTab}
@@ -171,7 +171,7 @@ export default function App() {
         />
 
         {/* View Contents */}
-        <main className="p-4 sm:p-6 md:p-8 max-w-7xl w-full mx-auto flex-1">
+        <main className="w-full max-w-[1500px] mx-auto flex-1 px-3 sm:px-5 md:px-6 xl:px-8 py-4 sm:py-6 lg:py-8">
           {activeTab === 'dashboard' && (
             <DashboardView
               user={user}

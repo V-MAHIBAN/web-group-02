@@ -1,24 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScreenType } from '../types';
-import { HERO_IMAGES } from '../data/mockData';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface AboutSectionProps {
   onNavigate: (screen: ScreenType) => void;
 }
 
+const ABOUT_US_IMAGE = '/placeholder.jpg';
+
 export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigate }) => {
+  const [imageError, setImageError] = useState(false);
+
   return (
     <section className="py-10 max-w-7xl mx-auto w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* Left Column: Image */}
         <div className="w-full relative group">
-          <div className="rounded-2xl overflow-hidden shadow-md border border-[#c4c6d2]/40 bg-white">
-            <img
-              alt="American Corner exterior entrance"
-              className="rounded-2xl shadow-md w-full h-[360px] md:h-[420px] object-cover transition-transform duration-500 group-hover:scale-105 bg-gray-200"
-              src="https://via.placeholder.com/800x600?text=American+Corner+Entrance"
-            />
+          <div className="overflow-hidden rounded-2xl border border-[#c4c6d2]/40 bg-white shadow-md">
+            {imageError ? (
+              <div className="flex h-[360px] w-full items-center justify-center rounded-2xl border border-dashed border-[#c4c6d2] bg-[#eef2f7] text-[#4b5563] md:h-[420px]">
+                <div className="flex flex-col items-center gap-2 text-center">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-2xl shadow-sm">📷</div>
+                  <p className="text-sm font-medium">Image unavailable</p>
+                </div>
+              </div>
+            ) : (
+              <img
+                alt="American Corner exterior entrance"
+                className="h-[360px] w-full rounded-2xl object-cover shadow-md transition-transform duration-500 group-hover:scale-105 bg-gray-200 md:h-[420px]"
+                src={ABOUT_US_IMAGE}
+                loading="lazy"
+                decoding="async"
+                onError={() => setImageError(true)}
+              />
+            )}
           </div>
           <div className="absolute -bottom-4 -right-4 hidden lg:flex items-center gap-3 bg-white p-3.5 rounded-xl shadow-lg border border-[#c4c6d2]/50">
             <div className="w-3 h-3 rounded-full bg-emerald-500 animate-ping" />

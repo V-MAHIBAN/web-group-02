@@ -11,18 +11,18 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <>
       {/* Embassy Acknowledgement Section */}
-      <section className="py-12 bg-white border-t border-[#c4c6d2]/30">
-        <div className="max-w-7xl mx-auto px-4 md:px-10 flex flex-col items-center gap-4 text-center">
+      <section className="border-t border-[#c4c6d2]/30 bg-[#f5f7fb] py-16 md:py-20">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-center gap-6 px-4 text-center md:px-8">
           <img
             src={LOGOS.usEmbassySealFooter}
             alt="U.S. Embassy Logo"
-            className="h-20 w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+            className="h-24 w-auto object-contain opacity-90 transition-all duration-300 hover:scale-105 md:h-28"
           />
-          <div className="flex flex-col gap-1">
-            <p className="text-xs md:text-sm font-semibold text-[#444650] uppercase tracking-wider">
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[#4a4d59] md:text-[12px]">
               Thank you for the support of the
             </p>
-            <h3 className="text-xl md:text-2xl font-bold text-[#00153e]">
+            <h3 className="text-[2.05rem] font-bold leading-[1.05] tracking-[-0.04em] text-[#00153e] md:text-[4rem]">
               U.S. Embassy Sri Lanka
             </h3>
           </div>
@@ -30,69 +30,74 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       </section>
 
       {/* Main Global Footer */}
-      <footer className="bg-[#00153e] text-white w-full mt-auto">
-        <div className="w-full px-4 md:px-10 py-16 grid grid-cols-1 md:grid-cols-4 gap-10 max-w-7xl mx-auto">
+      <footer className="mt-auto w-full bg-[#00153e] text-white">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 md:grid-cols-[1.1fr_1fr_1fr_1.2fr] md:px-10 md:py-14">
           {/* Brand Column */}
-          <div className="flex flex-col gap-3">
-            <span className="text-xl md:text-2xl font-bold text-white tracking-tight">
-              American Corner Batticaloa
-            </span>
-            <p className="text-sm text-[#c4c6d2] leading-relaxed">
-              Empowering the Eastern Province community through accessible education, culture, STEM innovation, and global connections.
-            </p>
-            <div className="pt-2 text-xs text-[#b1c5ff]/80">
-              <p>Public Library Complex</p>
-              <p>Batticaloa, Sri Lanka</p>
+          <div className="flex items-start gap-4 md:pt-3">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[1.5rem] font-bold text-[#00153e] shadow-sm">
+              N
+            </div>
+            <div className="flex flex-col gap-3">
+              <span className="text-xl font-bold tracking-tight text-white md:text-2xl">
+                American Corner Batticaloa
+              </span>
+              <p className="text-sm leading-relaxed text-[#c4c6d2]">
+                Empowering the Eastern Province community through accessible education, culture, STEM innovation, and global connections.
+              </p>
+              <div className="pt-2 text-xs text-[#b1c5ff]/80">
+                <p>Public Library Complex</p>
+                <p>Batticaloa, Sri Lanka</p>
+              </div>
             </div>
           </div>
 
           {/* Explore Column */}
-          <div className="flex flex-col gap-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-1">Explore</h4>
+          <div className="flex flex-col gap-3 md:pt-3">
+            <h4 className="mb-1 text-sm font-bold uppercase tracking-[0.18em] text-white">Explore</h4>
             <button
               onClick={() => { onNavigate('about'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               About Us
             </button>
             <button
               onClick={() => { onNavigate('programs'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               Programs & Workshops
             </button>
             <button
               onClick={() => { onNavigate('gallery'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               Photo Gallery
             </button>
             <button
               onClick={() => { onNavigate('student-login'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               Student Portal
             </button>
             <button
               onClick={() => { onNavigate('volunteer-login'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               Volunteer Portal
             </button>
           </div>
 
           {/* Support & Legal Column */}
-          <div className="flex flex-col gap-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-1">Support & Portals</h4>
+          <div className="flex flex-col gap-3 md:pt-3">
+            <h4 className="mb-1 text-sm font-bold uppercase tracking-[0.18em] text-white">Support & Portals</h4>
             <button
               onClick={() => { onNavigate('contact'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               Contact & Inquiries
             </button>
             <button
               onClick={() => { onNavigate('admin-login'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors"
+              className="text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               Admin Portal
             </button>
@@ -100,26 +105,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               href="https://lk.usembassy.gov"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-left text-sm text-[#c4c6d2] hover:text-[#ffdad9] transition-colors flex items-center gap-1"
+              className="flex items-center gap-1 text-left text-sm text-[#c4c6d2] transition-colors hover:text-[#ffdad9]"
             >
               <span>U.S. Embassy Colombo</span>
-              <ExternalLink className="w-3 h-3" />
+              <ExternalLink className="h-3 w-3" />
             </a>
-            <span className="text-sm text-[#c4c6d2]/70 cursor-pointer hover:text-white transition-colors">
+            <span className="cursor-pointer text-sm text-[#c4c6d2]/70 transition-colors hover:text-white">
               Privacy Policy
             </span>
-            <span className="text-sm text-[#c4c6d2]/70 cursor-pointer hover:text-white transition-colors">
+            <span className="cursor-pointer text-sm text-[#c4c6d2]/70 transition-colors hover:text-white">
               Terms of Service
             </span>
           </div>
 
           {/* Connect Column */}
-          <div className="flex flex-col gap-3">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-1">Connect</h4>
-            <p className="text-xs text-[#c4c6d2]">
+          <div className="flex flex-col gap-3 md:pt-3">
+            <h4 className="mb-1 text-sm font-bold uppercase tracking-[0.18em] text-white">Connect</h4>
+            <p className="text-xs leading-relaxed text-[#c4c6d2]">
               Follow our social channels and stay updated on free educational programs.
             </p>
-            <div className="flex gap-2.5 mt-2">
+            <div className="mt-2 flex gap-2.5">
               {/* X / Twitter */}
               <a
                 href={CONTACT_INFO.social.x}

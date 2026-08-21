@@ -39,10 +39,10 @@ export const SideNav: React.FC<SideNavProps> = ({
   ];
 
   return (
-    <aside className="bg-[#002868] text-white h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col shadow-lg border-r border-[#001c4a] z-40 select-none">
+    <aside className="bg-[#002868] text-white h-screen w-64 fixed left-0 top-0 hidden md:flex flex-col shrink-0 shadow-lg border-r border-[#001c4a] z-40 select-none">
       <div className="flex flex-col h-full p-4 gap-2">
         {/* Header / Brand */}
-        <div className="mb-4 px-2 pt-2">
+        <div className="mb-5 px-2 pt-2">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#BF0A30] text-white flex items-center justify-center font-bold text-sm shadow-md ring-2 ring-white/20">
               VC
@@ -59,7 +59,7 @@ export const SideNav: React.FC<SideNavProps> = ({
         </div>
 
         {/* Main Navigation Tabs */}
-        <nav className="flex-1 space-y-1.5 overflow-y-auto pr-1">
+        <nav className="flex-1 space-y-2 overflow-y-auto pr-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -74,7 +74,7 @@ export const SideNav: React.FC<SideNavProps> = ({
                 }`}
               >
                 <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-white' : 'text-blue-200'}`} />
-                <span>{item.label}</span>
+                <span className="leading-none">{item.label}</span>
               </button>
             );
           })}
@@ -92,7 +92,7 @@ export const SideNav: React.FC<SideNavProps> = ({
         </div>
 
         {/* Footer Settings & User Card */}
-        <div className="mt-auto border-t border-white/15 pt-3 space-y-1">
+        <div className="mt-auto border-t border-white/15 pt-3 space-y-2">
           <button
             onClick={() => onTabChange('profile')}
             className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-semibold text-blue-100/80 hover:bg-white/10 hover:text-white transition-colors text-left cursor-pointer"
@@ -102,7 +102,7 @@ export const SideNav: React.FC<SideNavProps> = ({
           </button>
 
           {/* User profile capsule */}
-          <div className="flex items-center gap-2.5 px-2.5 py-2 mt-2 bg-white/10 rounded-xl border border-white/10">
+          <div className="flex items-center gap-2.5 px-2.5 py-2 mt-1 bg-white/10 rounded-xl border border-white/10">
             <img
               src={user.avatarUrl}
               alt={user.name}
