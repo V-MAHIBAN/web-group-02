@@ -55,7 +55,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#121C2A] flex font-sans selection:bg-[#FFDAD6] selection:text-[#940021]">
+    <div className="flex min-h-screen w-full max-w-full overflow-hidden bg-[#F3F5F8] text-[#121C2A] font-sans selection:bg-[#FFDAD6] selection:text-[#940021]">
       {/* Side Navigation Bar */}
       <Sidebar
         currentTab={currentTab}
@@ -69,7 +69,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 transition-all duration-200">
+      <div className="flex min-w-0 flex-1 flex-col bg-[#F3F5F8] transition-all duration-200">
         {/* Top Navigation Bar */}
         <TopHeader
           onOpenMobileMenu={() => setIsMobileSidebarOpen(true)}
@@ -83,97 +83,98 @@ export default function App() {
 
         {/* Dynamic Page Views Canvas */}
         <main className="flex-1 overflow-y-auto bg-[#F8FAFC]">
-          <div className="p-4 sm:p-6 md:p-8 w-full">
+          <div className="mx-auto w-full max-w-[1400px] px-4 py-5 sm:px-6 md:px-8 lg:px-10">
             {currentTab === 'dashboard' && (
-            <DashboardView
-              metrics={metrics}
-              activities={activities}
-              students={students}
-              onOpenLogLate={() => setIsLogLateOpen(true)}
-              onOpenBroadcast={() => setIsBroadcastOpen(true)}
-              onOpenReport={() => setIsDailyReportOpen(true)}
-              onOpenCheckIn={() => setIsCheckInOpen(true)}
-              onViewAllActivity={() => setCurrentTab('attendance_history')}
-              onSelectStudent={student => setSelectedStudentForProfile(student)}
-            />
-          )}
+              <DashboardView
+                metrics={metrics}
+                activities={activities}
+                students={students}
+                onOpenLogLate={() => setIsLogLateOpen(true)}
+                onOpenBroadcast={() => setIsBroadcastOpen(true)}
+                onOpenReport={() => setIsDailyReportOpen(true)}
+                onOpenCheckIn={() => setIsCheckInOpen(true)}
+                onViewAllActivity={() => setCurrentTab('attendance_history')}
+                onSelectStudent={student => setSelectedStudentForProfile(student)}
+              />
+            )}
 
-          {currentTab === 'attendance_history' && (
-            <AttendanceHistoryView
-              records={attendanceRecords}
-              metrics={metrics}
-              onOpenCheckIn={() => setIsCheckInOpen(true)}
-            />
-          )}
+            {currentTab === 'attendance_history' && (
+              <AttendanceHistoryView
+                records={attendanceRecords}
+                metrics={metrics}
+                onOpenCheckIn={() => setIsCheckInOpen(true)}
+              />
+            )}
 
-          {currentTab === 'students' && (
-            <StudentManagementView
-              students={students}
-              onOpenNewStudent={() => setIsNewStudentOpen(true)}
-              onSelectStudent={student => setSelectedStudentForProfile(student)}
-            />
-          )}
+            {currentTab === 'students' && (
+              <StudentManagementView
+                students={students}
+                onOpenNewStudent={() => setIsNewStudentOpen(true)}
+                onSelectStudent={student => setSelectedStudentForProfile(student)}
+              />
+            )}
 
-          {currentTab === 'qr_scanner' && (
-            <QRScannerView
-              students={students}
-              onAttendanceUpdated={refreshAllData}
-              onSelectStudent={student => setSelectedStudentForProfile(student)}
-            />
-          )}
+            {currentTab === 'qr_scanner' && (
+              <QRScannerView
+                students={students}
+                onAttendanceUpdated={refreshAllData}
+                onSelectStudent={student => setSelectedStudentForProfile(student)}
+              />
+            )}
 
-          {currentTab === 'settings' && (
-            <SettingsView onResetData={handleResetData} />
-          )}
+            {currentTab === 'settings' && (
+              <SettingsView onResetData={handleResetData} />
+            )}
 
-          {currentTab === 'support' && (
-            <SupportView />
-          )}
+            {currentTab === 'support' && (
+              <SupportView />
+            )}
           </div>
+        </main>
+
+        {/* Interactive Modals */}
+        <CheckInModal
+          isOpen={isCheckInOpen}
+          onClose={() => setIsCheckInOpen(false)}
+          onSuccess={refreshAllData}
+          students={students}
+        />
+
+        <LogLateEntryModal
+          isOpen={isLogLateOpen}
+          onClose={() => setIsLogLateOpen(false)}
+          onSuccess={refreshAllData}
+          students={students}
+        />
+
+        <BroadcastAlertModal
+          isOpen={isBroadcastOpen}
+          onClose={() => setIsBroadcastOpen(false)}
+          onSuccess={refreshAllData}
+        />
+
+        <DailyReportModal
+          isOpen={isDailyReportOpen}
+          onClose={() => setIsDailyReportOpen(false)}
+          metrics={metrics}
+          records={attendanceRecords}
+          activities={activities}
+        />
+
+        <NewStudentModal
+          isOpen={isNewStudentOpen}
+          onClose={() => setIsNewStudentOpen(false)}
+          onSuccess={refreshAllData}
+        />
+
+        <StudentProfileModal
+          student={selectedStudentForProfile}
+          isOpen={selectedStudentForProfile !== null}
+          onClose={() => setSelectedStudentForProfile(null)}
+          onUpdate={refreshAllData}
+          attendanceHistory={attendanceRecords}
+        />
       </div>
-
-      {/* Interactive Modals */}
-      <CheckInModal
-        isOpen={isCheckInOpen}
-        onClose={() => setIsCheckInOpen(false)}
-        onSuccess={refreshAllData}
-        students={students}
-      />
-
-      <LogLateEntryModal
-        isOpen={isLogLateOpen}
-        onClose={() => setIsLogLateOpen(false)}
-        onSuccess={refreshAllData}
-        students={students}
-      />
-
-      <BroadcastAlertModal
-        isOpen={isBroadcastOpen}
-        onClose={() => setIsBroadcastOpen(false)}
-        onSuccess={refreshAllData}
-      />
-
-      <DailyReportModal
-        isOpen={isDailyReportOpen}
-        onClose={() => setIsDailyReportOpen(false)}
-        metrics={metrics}
-        records={attendanceRecords}
-        activities={activities}
-      />
-
-      <NewStudentModal
-        isOpen={isNewStudentOpen}
-        onClose={() => setIsNewStudentOpen(false)}
-        onSuccess={refreshAllData}
-      />
-
-      <StudentProfileModal
-        student={selectedStudentForProfile}
-        isOpen={selectedStudentForProfile !== null}
-        onClose={() => setSelectedStudentForProfile(null)}
-        onUpdate={refreshAllData}
-        attendanceHistory={attendanceRecords}
-      />
     </div>
   );
 }
