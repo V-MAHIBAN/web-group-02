@@ -1,6 +1,7 @@
 """Models module"""
 
 from app.models.models import (
+    Base,
     # Enums
     UserRole,
     UserStatus,

@@ -199,7 +199,7 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False, index=True)
     phone = Column(String(20), unique=True, nullable=True)
     hashed_password = Column(String(255), nullable=False)
-    roles = relationship("UserRole", secondary=user_roles, collection_class=list)
+    roles = Column(JSON, default=list, nullable=False)
     status = Column(SQLEnum(UserStatus), default=UserStatus.ACTIVE, nullable=False)
     avatar_url = Column(String(512), nullable=True)
     department = Column(String(100), nullable=True)
@@ -817,7 +817,7 @@ class ChatMessage(Base):
     )
     role = Column(String(20), nullable=False)  # user, assistant
     content = Column(Text, nullable=False)
-    metadata = Column(JSON, nullable=True)  # For AI lesson data, citations, etc.
+    message_metadata = Column(JSON, nullable=True)  # For AI lesson data, citations, etc.
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
 
     # Relationships
